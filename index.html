@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#22e06a" />
+<title>زيستا | ZESTA — Gaming · Streaming · FPS Player</title>
+
+<meta name="description" content="زيستا (ZESTA) — ستريمر ولاعب FPS تنافسي مصري. بث مباشر على Kick، وكل قنواته في مكان واحد." />
+<meta name="keywords" content="زيستا, Zesta, ZESTA, 1zesta, زيستا كيك, ستريمر مصري, FPS player, زيستا تيك توك" />
+<meta name="author" content="ZESTA" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta http-equiv="content-language" content="ar, en" />
+<meta name="geo.region" content="EG" />
+<link rel="canonical" href="https://zesta.vercel.app/" />
+
+<meta property="og:type" content="profile" />
+<meta property="og:site_name" content="ZESTA" />
+<meta property="og:title" content="زيستا | ZESTA — Gaming · Streaming · FPS Player" />
+<meta property="og:description" content="ستريمر ولاعب FPS تنافسي مصري. بث مباشر على Kick — وكل القنوات في مكان واحد." />
+<meta property="og:url" content="https://zesta.vercel.app/" />
+<meta property="og:image" content="https://zesta.vercel.app/og-card.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="ar_EG" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="زيستا | ZESTA" />
+<meta name="twitter:description" content="ستريمر ولاعب FPS تنافسي مصري. بث مباشر على Kick — وكل القنوات في مكان واحد." />
+<meta name="twitter:image" content="https://zesta.vercel.app/og-card.jpg" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "ZESTA",
+  "alternateName": ["زيستا", "Zesta", "1zesta"],
+  "description": "Egyptian competitive FPS player and livestreamer. Live on Kick.",
+  "jobTitle": "Streamer / Competitive FPS Player",
+  "nationality": "Egyptian",
+  "url": "https://zesta.vercel.app/",
+  "image": "https://zesta.vercel.app/logo-512.png",
+  "sameAs": [
+    "https://kick.com/zesta",
+    "https://www.instagram.com/1zesta/",
+    "https://www.tiktok.com/@1zesta",
+    "https://discord.gg/K755vPDUyK",
+    "https://whatsapp.com/channel/0029VbCWDnrDJ6H8QbuO202Q"
+  ],
+  "worksFor": { "@type": "Organization", "name": "Kick", "url": "https://kick.com/zesta" }
+}
+</script>
+
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="icon-96.png" />
+<link rel="apple-touch-icon" href="icon-180.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="image" href="logo-512.webp" type="image/webp" fetchpriority="high" />
+<link rel="preload" as="image" href="wordmark-1100.webp" type="image/webp" fetchpriority="high" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cairo:wght@400;600;900&family=Outfit:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=zesta1" />
+</head>
+<body>
+
+<!-- ═══ entry gate — a tap here is the user gesture that unlocks autoplay ═══ -->
+<div id="entryGate" class="entry-gate">
+  <div class="entry-inner">
+    <img src="logo-256.webp" alt="" class="entry-logo" width="96" height="96" />
+    <img src="wordmark-640.webp" alt="ZESTA" class="entry-wordmark" width="180" height="60" />
+    <p class="entry-tag" data-i18n="heroTag">جيمنج <i>•</i> بث مباشر <i>•</i> لاعب FPS تنافسي</p>
+    <button type="button" id="entryBtn" class="btn btn-primary btn-lg entry-btn">
+      <span data-i18n="enterSite">ادخل</span>
+    </button>
+    
+  </div>
+</div>
+
+<!-- ═══ preloader ═══ -->
+<div id="boot" aria-hidden="true">
+  <div class="boot-ring"></div>
+  <img src="logo-256.webp" alt="" class="boot-logo" width="120" height="120" />
+  <div class="boot-bar"><i></i></div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('boot');
+    var kill = function () { if (b) b.className = 'done'; };
+    setTimeout(kill, 1100);
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(kill, 260); });
+  })();
+</script>
+
+<!-- ═══ ambient layers ═══ -->
+<div class="bg-photo" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="bg-veil" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<!-- ═══ nav ═══ -->
+<header class="nav" id="nav">
+  <a class="nav-brand" href="#home" aria-label="ZESTA">
+    <img src="wordmark-640.webp" alt="ZESTA" width="135" height="45" />
+  </a>
+
+  <nav class="nav-links" id="navLinks" aria-label="Main">
+    <a href="#home"   class="on" data-i18n="navHome">الرئيسية</a>
+    <a href="#about"  data-i18n="navAbout">عني</a>
+    <a href="#live"   data-i18n="navLive">البث</a>
+    <a href="#socials" data-i18n="navSocials">القنوات</a>
+    <a href="#contact" data-i18n="navContact">تواصل</a>
+  </nav>
+
+  <div class="nav-act">
+    <div class="lang-seg" role="group" aria-label="Language">
+      <button type="button" data-lang="ar">العربية</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+  </div>
+
+  <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+</header>
+
+<!-- ═══ fixed social rail (desktop) ═══ -->
+<aside class="rail" id="rail" aria-label="Social links">
+  <span class="rail-crown" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 18h18l1.2-9-5.4 3.2L12 5 7.2 12.2 1.8 9 3 18Z"/></svg>
+  </span>
+  <div class="rail-items" id="railItems"><!-- injected --></div>
+</aside>
+
+<!-- ═══ section dots ═══ -->
+<nav class="dots" id="dots" aria-label="Sections"><!-- injected --></nav>
+
+<main>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="home">
+    <div class="hero-side hero-side-l" aria-hidden="true"></div>
+    <div class="hero-side hero-side-r" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="hero-logo">
+        <span class="hl-ring r1"></span>
+        <span class="hl-ring r2"></span>
+        <picture>
+          <source srcset="logo-512.webp" type="image/webp" />
+          <img src="logo-512.png" alt="ZESTA" width="300" height="300" fetchpriority="high" />
+        </picture>
+      </div>
+
+      <h1 class="hero-mark">
+        <img src="wordmark-1100.webp" alt="ZESTA" width="640" height="214" fetchpriority="high" />
+      </h1>
+
+      <p class="hero-tag" data-i18n="heroTag">جيمنج <i>•</i> بث مباشر <i>•</i> لاعب FPS تنافسي</p>
+
+      <a class="live-pill" id="livePill" href="https://kick.com/zesta" target="_blank" rel="noopener" data-state="checking">
+        <span class="pulse"></span>
+        <span class="live-txt" data-i18n="checking">بنشيّك على البث…</span>
+      </a>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="https://kick.com/zesta" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path fill="currentColor" d="M3 3h5.4v5.6h1.8V5.8h1.8V3h5.4v5.6h-1.8v2.8h-1.8v1.2h1.8v2.8h1.8V21h-5.4v-2.8h-1.8v-2.8H8.4V21H3z"/></svg>
+          <span data-i18n="watchLive">شوف البث</span>
+        </a>
+        <a class="btn btn-outline btn-lg" href="#live">
+          <span data-i18n="explore">استكشف</span>
+          <svg viewBox="0 0 24 24" class="ic ic-down" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-6-6 6 6 6-6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <a class="scroll-hint" href="#live" aria-label="scroll"><span></span></a>
+  </section>
+
+  <!-- ═══ LIVE + ABOUT ═══ -->
+  <section class="sec sec-duo" id="live">
+    <div class="duo">
+
+      <!-- live status -->
+      <article class="panel" id="liveCard">
+        <header class="panel-h">
+          <svg viewBox="0 0 24 24" class="ph-ic" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 12h3l2-6 4 12 3-8 2 2h4"/></svg>
+          <h2 data-i18n="liveStatus">حالة البث</h2>
+        </header>
+
+        <div class="live-body">
+          <div class="live-thumb" id="liveThumb">
+            <img id="liveThumbImg" src="logo-512.webp" alt="" width="512" height="512" />
+            <span class="thumb-badge" id="thumbBadge" hidden>● LIVE</span>
+          </div>
+          <div class="live-meta">
+            <p class="lm-state" id="lmState" data-state="checking">
+              <span class="pulse"></span><span data-i18n="checking">بنشيّك على البث…</span>
+            </p>
+            <p class="lm-title" id="lmTitle" data-i18n="offTitle">البث مقفول دلوقتي</p>
+            <p class="lm-sub" id="lmSub" data-i18n="offSub">اعمل فولو على Kick ومتفوّتش أي لايف</p>
+            <ul class="lm-stats">
+              <li id="statFollowers" hidden>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4 0-8 2-8 4.5V21h16v-2.5C20 16 16 14 12 14Z"/></svg>
+                <b id="statFollowersVal">—</b><span data-i18n="followers">متابع</span>
+              </li>
+              <li id="statViewers" hidden>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 5c-5 0-9 4.5-10 7 1 2.5 5 7 10 7s9-4.5 10-7c-1-2.5-5-7-10-7Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Z"/></svg>
+                <b id="statViewersVal">—</b><span data-i18n="viewers">مشاهد</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="live-player" id="livePlayer" hidden></div>
+
+        <a class="btn btn-primary btn-block" href="https://kick.com/zesta" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path fill="currentColor" d="M3 3h5.4v5.6h1.8V5.8h1.8V3h5.4v5.6h-1.8v2.8h-1.8v1.2h1.8v2.8h1.8V21h-5.4v-2.8h-1.8v-2.8H8.4V21H3z"/></svg>
+          <span data-i18n="watchOnKick">اتفرج على Kick</span>
+        </a>
+        <p class="live-refresh" id="liveRefresh" data-i18n="autoRefresh">بيتحدّث تلقائيًا كل دقيقة</p>
+      </article>
+
+      <!-- about -->
+      <article class="panel" id="about">
+        <header class="panel-h">
+          <svg viewBox="0 0 24 24" class="ph-ic" aria-hidden="true"><path fill="currentColor" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4 0-8 2-8 4.5V21h16v-2.5C20 16 16 14 12 14Z"/></svg>
+          <h2 data-i18n="aboutMe">عن زيستا</h2>
+        </header>
+
+        <div class="bio-grid">
+          <div class="bio-card">
+            <span class="bio-lang">العربية</span>
+            <h3 class="bio-name">زيستا</h3>
+            <p>🎮 أهلاً بيكم 🎮<br />أنا زيستا، ستريمر ولاعب FPS تنافسي مصري، شغوف بالدقة وسرعة رد الفعل والمستوى الاحترافي في اللعب.</p>
+            <ul class="bio-list">
+              <li><span>🎯</span>معروف بدقة تصويب عالية ومباريات مليانة إثارة.</li>
+              <li><span>📈</span>إصرار دايم على التطور والتحسين.</li>
+              <li><span>🔥</span>بثوث مليانة طاقة وحماس ولعب تنافسي.</li>
+              <li><span>👥</span>مجتمع بيكبر يوم ورا يوم.</li>
+            </ul>
+            <p class="bio-sign"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 18h18l1.2-9-5.4 3.2L12 5 7.2 12.2 1.8 9 3 18Z"/></svg> ZESTA</p>
+          </div>
+
+          <div class="bio-card">
+            <span class="bio-lang">ENGLISH</span>
+            <h3 class="bio-name">ZESTA</h3>
+            <p>🎮 Welcome 🎮<br />Egyptian streamer and competitive FPS player with a passion for precision, fast reactions, and high-level gameplay.</p>
+            <ul class="bio-list">
+              <li><span>🎯</span>Known for sharp aim and intense matches.</li>
+              <li><span>📈</span>A relentless drive to improve.</li>
+              <li><span>🔥</span>High-energy streams and competitive gameplay.</li>
+              <li><span>👥</span>A community that keeps growing every day.</li>
+            </ul>
+            <p class="bio-sign"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 18h18l1.2-9-5.4 3.2L12 5 7.2 12.2 1.8 9 3 18Z"/></svg> ZESTA</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ SOCIALS ═══ -->
+  <section class="sec" id="socials">
+    <div class="sec-head">
+      <span class="rule" aria-hidden="true"></span>
+      <h2 class="sec-title" data-i18n="connectTitle">تواصل معايا</h2>
+      <span class="rule" aria-hidden="true"></span>
+    </div>
+    <div class="social-grid" id="socialGrid"><!-- injected --></div>
+  </section>
+
+  <!-- ═══ SUPPORT ═══ -->
+  <section class="sec" id="support">
+    <div class="sec-head">
+      <span class="rule" aria-hidden="true"></span>
+      <h2 class="sec-title" data-i18n="supportTitle">ادعم زيستا</h2>
+      <span class="rule" aria-hidden="true"></span>
+    </div>
+
+    <div class="support">
+      <div class="sup-qr">
+        <img src="instapay-qr-520.png" alt="InstaPay QR — ZESTA" width="240" height="240" loading="lazy" />
+        <span class="sup-qr-hint" data-i18n="scanQr">امسح الكود بكاميرا الموبايل</span>
+      </div>
+
+      <div class="sup-body">
+        <span class="sup-brand">
+          <svg class="sup-brand-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.6 2 4 13.4h5.2L8.1 22l9.9-11.6h-5.3L13.6 2Z"/></svg>
+          <b>InstaPay</b>
+        </span>
+        <p class="sup-lead" data-i18n="supportLead">لو المحتوى عاجبك وحابب تدعم، تقدر تحوّل على انستاباي — أي مبلغ بيفرق ويساعد على محتوى أحسن.</p>
+        <ul class="sup-steps">
+          <li><span>1</span><span data-i18n="supStep1">دوس على الزرار أو امسح الكود</span></li>
+          <li><span>2</span><span data-i18n="supStep2">هيفتحلك انستاباي على طول</span></li>
+          <li><span>3</span><span data-i18n="supStep3">اكتب المبلغ وأكّد التحويل</span></li>
+        </ul>
+
+        <div class="sup-cta">
+          <a class="btn btn-instapay btn-lg" href="https://ipn.eg/S/zesta/instapay/92AumY" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path fill="currentColor" d="M13.6 2 4 13.4h5.2L8.1 22l9.9-11.6h-5.3L13.6 2Z"/></svg>
+            <span data-i18n="openInstapay">ادفع على انستاباي</span>
+          </a>
+          <button class="btn btn-outline btn-lg" id="copyPay" type="button">
+            <svg viewBox="0 0 24 24" class="ic" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 9h10v10H9zM5 15V5h10"/></svg>
+            <span data-i18n="copyLink">انسخ الرابط</span>
+          </button>
+        </div>
+
+        <p class="sup-note" data-i18n="supportNote">الدعم اختياري تمامًا — متابعتك ومشاهدتك للبث تفرق برضو.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="foot" id="contact">
+  <div class="foot-in">
+    <img class="foot-mark" src="wordmark-640.webp" alt="ZESTA" width="212" height="71" />
+    <p class="foot-tag" data-i18n="heroTag">جيمنج <i>•</i> بث مباشر <i>•</i> لاعب FPS تنافسي</p>
+  </div>
+
+  <div class="foot-bar">
+    <p class="foot-c">© <span id="yr">2026</span> <span class="foot-brand-name">Zesta</span> · <span data-i18n="rights">جميع الحقوق محفوظة</span></p>
+
+    <span class="dev-credit">
+      <i class="dev-edge" aria-hidden="true"></i>
+      <i class="dev-shine" aria-hidden="true"></i>
+      <span class="dev-label">Developer &amp; Designer by</span>
+      <span class="dev-name">Abdelrahman</span>
+    </span>
+  </div>
+</footer>
+
+<!-- ═══ music player ═══ -->
+<div class="player" id="player" data-state="idle">
+  <audio id="audio" loop preload="metadata">
+    <source src="music.webm" type="audio/webm" />
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button class="pl-head" id="plHead" type="button" aria-expanded="false" aria-controls="plBody" aria-label="Zesta Music">
+    <span class="pl-viz" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="pl-titles">
+      <b>Zesta Music</b>
+      <span class="pl-state" id="plState" data-i18n="musicOff">اضغط للتشغيل</span>
+    </span>
+    <span class="pl-chev" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+    </span>
+  </button>
+
+  <div class="pl-body" id="plBody">
+   <div class="pl-inner">
+    <div class="pl-row pl-seekrow">
+      <button class="pl-btn pl-play" id="plPlay" type="button" aria-label="Play">
+        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7L8 5Z"/></svg>
+        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+      </button>
+      <button class="pl-btn pl-skip pl-skip-back" id="plBack5" type="button" aria-label="Back 5 seconds">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 7 4 12l5 5M4 12h9a5 5 0 1 0 0-10"/></svg>
+      </button>
+      <input class="pl-range pl-seek" id="plSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek" />
+      <button class="pl-btn pl-skip pl-skip-fwd" id="plFwd5" type="button" aria-label="Forward 5 seconds">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 7 20 12l-5 5M20 12h-9a5 5 0 1 1 0-10"/></svg>
+      </button>
+      <span class="pl-time" id="plTime">0:00 / 0:00</span>
+    </div>
+
+    <div class="pl-row">
+      <button class="pl-btn pl-mute" id="plMute" type="button" aria-label="Mute">
+        <svg class="i-vol" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a4 4 0 0 0-2-3.5v7a4 4 0 0 0 2-3.5Zm-2 -8v2.1a6 6 0 0 1 0 11.8V20a8 8 0 0 0 0-16Z"/></svg>
+        <svg class="i-mute" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4Zm16.5-1.1-1.4-1.4L16.6 9 14.1 6.5l-1.4 1.4L15.2 10.4l-2.5 2.5 1.4 1.4 2.5-2.5 2.5 2.5 1.4-1.4-2.5-2.5 2.5-2.5Z"/></svg>
+      </button>
+      <input class="pl-range pl-vol" id="plVol" type="range" min="0" max="100" value="35" step="1" aria-label="Volume" />
+      <span class="pl-volnum" id="plVolNum">35</span>
+    </div>
+
+    <div class="pl-row pl-speeds" role="group" aria-label="Speed">
+      <button type="button" data-rate="0.75">0.75×</button>
+      <button type="button" data-rate="1" aria-pressed="true">1×</button>
+      <button type="button" data-rate="1.25">1.25×</button>
+      <button type="button" data-rate="1.5">1.5×</button>
+    </div>
+   </div>
+  </div>
+</div>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m-6 6 6-6 6 6"/></svg>
+</button>
+
+<script src="app.js?v=zesta1"></script>
+</body>
+</html>
